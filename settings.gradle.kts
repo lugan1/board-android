@@ -25,7 +25,7 @@ dependencyResolutionManagement {
 rootProject.name = "My Application"
 include(":app")
 include(":feature:auth")
-include(":feature:board")
+include(":feature:post")
 include(":core:domain")
 include(":core:model")
 include(":core:network")
