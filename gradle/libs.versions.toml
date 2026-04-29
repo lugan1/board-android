@@ -1,41 +1,45 @@
 [versions]
-# Android Build Tools
 agp = "9.2.0"
 ksp = "2.3.7"
-
-# Kotlin
 kotlin = "2.3.21"
-
-# AndroidX Core
+# 코틀린 직렬화 '라이브러리'만을 위한 독립 버전
+kotlinxSerializationJson = "1.11.0"
 coreKtx = "1.18.0"
 
-# Testing
 junit = "4.13.2"
-junitVersion = "1.3.0"
+coroutines-test = "1.10.2"
+mockk = "1.14.9"
+androidx-junit = "1.3.0"
+androidxTestRunner = "1.7.0"
+androidxTestMonitor = "1.8.0"
 
 # Compose & UI
 composeBom = "2026.04.01"
 activityCompose = "1.13.0"
 lifecycleRuntimeKtx = "2.10.0"
-espressoCore = "3.7.0"
-appcompat = "1.6.1"
-material = "1.13.0"
+
+navigationCompose = "2.9.8"
+
+hilt = "2.59.2"
+hiltNavigationCompose = "1.3.0"
+
+# Network & Data (Retrofit, Room, Datastore)
+retrofit = "3.0.0"
+okhttp = "5.3.2"
+room = "2.8.4"
+datastore = "1.2.1"
+paging = "3.4.2"
+coil = "2.7.0"
 
 [libraries]
-# AndroidX Core
 # Bundle, Intent, String, SystemClock 등과 같은 Android 프레임워크 API를 더 편리하게 사용할 수 있도록 확장 함수와 유틸리티를 제공하는 라이브러리
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
-# Testing
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+# viewmodel 내부에서 코루틴을 사용할수 있게해준다. MVI 패턴을 사용한다면 필수
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 
-# esspresso 는 xml 기반 UI 테스트 도구이므로 Compose UI 테스트에는 사용하지 않는다. Compose UI 테스트는 androidx-compose-ui-test-junit4 라이브러리를 사용한다.
-# androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-
-
-# lifecycleScope, repeatOnLifecycle, viewModelScope 등에서 사용되는 라이프사이클 관련 확장 함수들을 제공하는 라이브러리
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+# StateFlow를 Compose 생명주기에 맞춰 안전하게 관찰할 수 있는 collectAsStateWithLifecycle() 등을 제공하는 라이브러리
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
 
 # setContent { ... } 블록에서 Compose UI를 사용할 수 있게 해주는 라이브러리
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -46,36 +50,104 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+# 페이지 네비게이션에 path param 을 인스턴스채로 직렬화 하기위한 순수 코틀린 라이브러리
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
+# paging 이벤트를 구현하는 순수 코틀린으로된 라이브러리, core:data 에서 구현한다.
+androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
+
+
+# UI Libraries & Media
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+
+# Dependency Injection (Hilt)
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+# 순수 코틀린 Injection
+javax-inject = { group = "javax.inject", name = "javax.inject", version = "1" }
+
+# Network & Data (Retrofit, Room, Datastore)
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+
+# @Dao, @Entity, @Database 같은 어노테이션을 제공하고 실제 SQLite 에 접근하여 데이터를 조회, 삽입, 수정한다.
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+# 인터페이스의 @Query("SELECT * FROM posts") 같은 어노테이션을 실제 코드로 구현해준다. (hilt-compiler 플러그인 필요)
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+# paging3 의 PagingSource를 room의 Dao에서 바로 사용할수 있게 해준다. (무한스크롤 구현시 로컬 캐싱에 사용)
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+
+# 코루틴/Flow를 쓴다면 필수 (MVI 패턴 시 권장)
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# compose ui 테스트를 할때는 activity가 필요하다. 이 라이브러리 안에는 아무것도 없는 투명한 ComponentActivity가 하나 정의되어 사용할 수 있게해준다.
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 
-# AppcompatActivity 는 구형기기를 지원할때 사용한다.
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+# 안드로이드 의존이 필요한 테스트에 사용
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-junit" }
+# 코틀린 특화, DB, Network 로직 테스트에 사용
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+# 코루틴(비동기 로직)을 테스트할 때, 시간을 조작하거나(advanceTimeBy) 테스트용 디스패처(runTest)를 제공하여 비동기 코드를 동기적으로 멈춰서 검증, 테스트에 사용
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test" }
+# 안드로이드 기기나 에뮬레이터에 '테스트용 앱'을 설치하고, 테스트 코드를 순서대로 실행한 뒤 결과를 수집하는 엔진(Runner)
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+# 테스트가 돌아가는 동안, 안드로이드 OS 내부의 상태(Activity가 켜졌는지, 꺼졌는지, 메인 스레드가 바쁜지)를 실시간으로 감시
+androidx-test-monitor = { group = "androidx.test", name = "monitor", version.ref = "androidxTestMonitor" }
+
+
 # Compose 에서는 XML을 사용안하니 안드로이드 모듈에서 자동 생성되는 이 의존성은 삭제해도 무방하다.
-# Compose 앱은 무거운 AppCompatActivity 대신, 훨씬 가벼운 ComponentActivity를 상속받아 사용한다.
+# Compose 앱은 무거운 AppCompatActivity (구형기기를 지원할때 사용한다.) 대신, 훨씬 가벼운 ComponentActivity를 상속받아 사용한다.
 # androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-# material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+# lifecycleScope{}, repeatOnLifecycle{}, viewModelScope{} 등에서 사용되는 라이프사이클 관련 확장 함수들을 제공하는 라이브러리
+# activity, fragment 생명주기에 맞춰 코루틴을 실행해야 될때 사용한다.
+# androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 
+# viewmodel의 livedata를 컴포즈에서 관찰할수 있게 해주는 라이브러리. 하지만 최신 트렌드에서는 안드로이드 의존을 갖는 livedata 보다는 순수 코틀린의 stateFlow를 관찰하는것을 권장한다.
+# androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "uiTooling" }
+
+# esspresso 는 xml 기반 UI 테스트 도구이므로 Compose UI 테스트에는 사용하지 않는다. Compose UI 테스트는 androidx-compose-ui-test-junit4 라이브러리를 사용한다.
+# androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+# Gson 라이브러리는 Java기반의 라이브러리이며, 코틀린의 null 안정성을 무시하는경우가 있어 앱크래쉬의 주범이다. 대신 retrofit-kotlinx-serialization 가 선호된다.
+# retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 
 [bundles]
-# Feature 모듈에서 "컴포즈 + 뷰모델"을 쓰기 위한 최소 번들
-feature-compose-core = [
-    "androidx-compose-ui",
-    "androidx-compose-ui-graphics",
-    "androidx-compose-material3",
-]
+# Compose 핵심 라이브러리
+compose = ["androidx-compose-ui", "androidx-compose-ui-graphics", "androidx-compose-ui-tooling-preview", "androidx-compose-material3"]
 
-feature-compose-test = [
-    "androidx-compose-ui-tooling",
-    "androidx-compose-ui-tooling-preview",
-    "androidx-compose-ui-test-manifest",
-]
+# Compose 프리뷰 및 디버깅 라이브러리
+compose-debug = ["androidx-compose-ui-tooling", "androidx-compose-ui-test-manifest"]
+
+# Network 라이브러리
+network = ["retrofit", "retrofit-kotlinx-serialization", "okhttp-logging-interceptor"]
+
+# Room 라이브러리
+room = ["room-runtime", "room-ktx", "room-paging"]
+
+# 순수 코틀린 유닛 테스트
+test-unit = ["junit", "mockk", "kotlinx-coroutines-test"]
+
+# 일반 안드로이드 테스트 (데이터 계층용)
+test-android = ["androidx-junit", "androidx-test-runner"]
+
+# 안드로이드 UI 테스트 (UI/Feature 계층용)
+test-android-ui = ["androidx-junit", "androidx-test-runner", "androidx-test-monitor", "androidx-compose-ui-test-junit4"]
 
 
 [plugins]
@@ -96,3 +168,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 # kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
