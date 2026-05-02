@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -33,6 +35,16 @@ android {
 }
 
 dependencies {
+    // network Monitor 인터페이스
+    implementation(project(":core:common"))
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    // Network & Retrofit
+    implementation(libs.bundles.network)
+    implementation(libs.okhttp.logging.interceptor)
+
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
