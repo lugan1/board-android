@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.data"
+    namespace = "com.example.datastore"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -18,32 +18,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
 
 dependencies {
-    // network Monitor 인터페이스
-    implementation(project(":core:common"))
-
+    implementation(libs.datastore)
+    implementation(libs.tink)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-
-    // Network & Retrofit
-    implementation(libs.bundles.network)
-    implementation(libs.okhttp.logging.interceptor)
 
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)

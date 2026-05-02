@@ -28,6 +28,8 @@ retrofit = "3.0.0"
 okhttp = "5.3.2"
 room = "2.8.4"
 datastore = "1.2.1"
+tink = "1.21.0"
+
 paging = "3.4.2"
 coil = "2.7.0"
 
@@ -90,6 +92,8 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "ro
 # 코루틴/Flow를 쓴다면 필수 (MVI 패턴 시 권장)
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+# java 암호화 모듈 (datastore 암호화에 사용)
+tink = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "tink" }
 
 # compose ui 테스트를 할때는 activity가 필요하다. 이 라이브러리 안에는 아무것도 없는 투명한 ComponentActivity가 하나 정의되어 사용할 수 있게해준다.
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
