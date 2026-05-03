@@ -7,15 +7,24 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-// 1. Load local.properties to access sensitive information safely
+
 val properties = Properties()
 val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     properties.load(localPropertiesFile.inputStream())
 }
 
-val local = properties.getProperty("BASE_URL_LOCAL") ?: "\"http://10.0.2.2:8080/\""
-val service = properties.getProperty("BASE_URL_SERVICE") ?: "\"\""
+// Android의 buildConfigField로 String 타입의 값을 넘길 때는, 최종적으로 자동 생성되는 BuildConfig.java 코드 내부에서
+// 해당 값이 "(큰따옴표)로 감싸져 있어야 문법 오류가 발생하지 않는다.
+fun toJavaStringLiteral(value: String): String =
+    "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+
+val local = toJavaStringLiteral(
+    properties.getProperty("BASE_URL_LOCAL") ?: "http://10.0.2.2:8080/"
+)
+val service = toJavaStringLiteral(
+    properties.getProperty("BASE_URL_SERVICE") ?: ""
+)
 
 android {
     namespace = "com.example.network"
