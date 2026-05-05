@@ -41,6 +41,9 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    // DefaultNetworkMonitor 에서 Flow 를 사용하고 있으므로 명시적으로 정의
+    implementation(libs.kotlinx.coroutines.core)
+
     // Network & Retrofit
     implementation(libs.bundles.network)
     implementation(libs.okhttp.logging.interceptor)

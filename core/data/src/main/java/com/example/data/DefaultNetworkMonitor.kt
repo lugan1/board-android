@@ -27,6 +27,7 @@ class DefaultNetworkMonitor @Inject constructor() : NetworkMonitor {
         _networkError.tryEmit(message)
     }
 
+    //todo: 네트워크 연결이 끊겼을시의 로직 구현
     fun setOnline(online: Boolean) {
         _isOnline.value = online
     }
