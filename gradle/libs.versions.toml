@@ -29,6 +29,7 @@ okhttp = "5.3.2"
 room = "2.8.4"
 datastore = "1.2.1"
 tink = "1.21.0"
+kermit = "2.1.0"
 
 paging = "3.4.2"
 coil = "2.7.0"
@@ -80,7 +81,8 @@ javax-inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-
+# Logging 라이브러리 (KMP 지원)
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
 # @Dao, @Entity, @Database 같은 어노테이션을 제공하고 실제 SQLite 에 접근하여 데이터를 조회, 삽입, 수정한다.
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -94,6 +96,8 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 # java 암호화 모듈 (datastore 암호화에 사용)
 tink = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "tink" }
+
+
 
 # compose ui 테스트를 할때는 activity가 필요하다. 이 라이브러리 안에는 아무것도 없는 투명한 ComponentActivity가 하나 정의되어 사용할 수 있게해준다.
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }

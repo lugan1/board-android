@@ -42,10 +42,19 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:model"))
+    implementation(project(":core:ui"))
     implementation(project(":core:common"))
+    implementation(project(":core:navigation"))
+    implementation(project(":feature:auth"))
+    implementation(project(":feature:post"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    implementation(libs.kermit)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
