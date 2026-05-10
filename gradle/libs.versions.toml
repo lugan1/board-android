@@ -5,9 +5,9 @@ kotlin = "2.3.21"
 # 코틀린 직렬화 '라이브러리'만을 위한 독립 버전
 kotlinxSerializationJson = "1.11.0"
 coreKtx = "1.18.0"
+coroutines = "1.10.2"
 
 junit = "4.13.2"
-coroutines-test = "1.10.2"
 mockk = "1.14.9"
 androidx-junit = "1.3.0"
 androidxTestRunner = "1.7.0"
@@ -28,6 +28,9 @@ retrofit = "3.0.0"
 okhttp = "5.3.2"
 room = "2.8.4"
 datastore = "1.2.1"
+tink = "1.21.0"
+kermit = "2.1.0"
+
 paging = "3.4.2"
 coil = "2.7.0"
 
@@ -78,7 +81,8 @@ javax-inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-
+# Logging 라이브러리 (KMP 지원)
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
 # @Dao, @Entity, @Database 같은 어노테이션을 제공하고 실제 SQLite 에 접근하여 데이터를 조회, 삽입, 수정한다.
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -90,6 +94,10 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "ro
 # 코루틴/Flow를 쓴다면 필수 (MVI 패턴 시 권장)
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+# java 암호화 모듈 (datastore 암호화에 사용)
+tink = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "tink" }
+
+
 
 # compose ui 테스트를 할때는 activity가 필요하다. 이 라이브러리 안에는 아무것도 없는 투명한 ComponentActivity가 하나 정의되어 사용할 수 있게해준다.
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
@@ -102,12 +110,15 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-junit" }
 # 코틀린 특화, DB, Network 로직 테스트에 사용
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 # 코루틴(비동기 로직)을 테스트할 때, 시간을 조작하거나(advanceTimeBy) 테스트용 디스패처(runTest)를 제공하여 비동기 코드를 동기적으로 멈춰서 검증, 테스트에 사용
-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 # 안드로이드 기기나 에뮬레이터에 '테스트용 앱'을 설치하고, 테스트 코드를 순서대로 실행한 뒤 결과를 수집하는 엔진(Runner)
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
 # 테스트가 돌아가는 동안, 안드로이드 OS 내부의 상태(Activity가 켜졌는지, 꺼졌는지, 메인 스레드가 바쁜지)를 실시간으로 감시
 androidx-test-monitor = { group = "androidx.test", name = "monitor", version.ref = "androidxTestMonitor" }
+
 
 
 # Compose 에서는 XML을 사용안하니 안드로이드 모듈에서 자동 생성되는 이 의존성은 삭제해도 무방하다.
