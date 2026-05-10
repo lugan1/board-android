@@ -1,15 +1,13 @@
 package com.example.network.interceptor
 
-import android.content.Context
 import com.example.common.NetworkMonitor
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import javax.inject.Inject
 
 
 class ErrorInterceptor @Inject constructor(
