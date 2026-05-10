@@ -3,7 +3,7 @@ package com.example.network.interceptor
 import android.content.Context
 import com.example.common.NetworkMonitor
 import dagger.hilt.android.qualifiers.ApplicationContext
-import jakarta.inject.Inject
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
 import org.json.JSONObject

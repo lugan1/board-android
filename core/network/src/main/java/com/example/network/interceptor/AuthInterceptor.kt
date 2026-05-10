@@ -1,7 +1,7 @@
 package com.example.network.interceptor
 
 import com.example.datastore.TokenManager
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
